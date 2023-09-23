@@ -17,5 +17,6 @@ The scripts can be downloaded manually and ran with, bash filenamexample.sh with
 SCRIPTS
 
 Unbound (has Piholes curl command built in if you havn't installed Pihole yet :))
-https://https://github.com/raptor170/Piscripts/edit/main/unbound.sh
+
+https://github.com/raptor170/Piscripts/blob/main/unbound.sh
 
