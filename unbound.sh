@@ -207,13 +207,25 @@ dig fail01.dnssec.works @127.0.0.1 -p 5335
     echo ""
 sleep 5
     echo -e "\e[1;33mIf dig dnssec.works @127.0.0.1 -p 5335 shows NOERROR"
-    echo -e "And dig fail01.dnssec.works @127.0.0.1 -p 5335 Shows SERVFAIL\e[0m"
+    echo "And dig fail01.dnssec.works @127.0.0.1 -p 5335 Shows SERVFAIL"
+    echo -e "Than Unbound Installation Was Succesful!\e[0m"
     echo ""
+while true; do
+    read -p "Would you Like to Automatically switch Pi-Hole upstream to Unbound? (y/n)" ub
+    case $ub in
+    [yY] ) echo ok, switching upstream now;
+    pihole -a setdns 127.0.0.1#5335
+    break;;
+    [nN] ) echo -e "\e[1;31mSkipping Auto DNS change...\e[0m"
+    echo -e "\e[1;35mPlease Proceed to Pihole, Settings, DNS, under Custom 1 IPv4 enter the value"
+    echo "127.0.0.1#5335 and remove the current upstream provider"
+    echo -e "and click save on bottom of page\e[0m"
+    break;;
+* ) echo invalid response;;
+   esac
+  done 
+
     echo ""
-    echo -e "\e[1;32mThan Proceed to Pihole, Settings, DNS, under Custom 1 IPv4 enter the value"
-    echo "127.0.0.1#5335"
-    echo "and click save on bottom of page"
-    echo ""
-    echo "If all goes well, Enjoy Running Unbound!!!"
+    echo -e "\e[1;32mEnjoy Running Unbound!!!"
     echo "and if feeling generous, im always down for a coffee, donations not required, but appreciated"
     echo -e "Thank you for using Robinson Scripts, ENJOY!!!\e[0m"
