@@ -13,12 +13,9 @@ scripts may or may not work on older version such as Buster etc. feel free to tr
 
 The scripts can be downloaded manually and ran with, bash filenamexample.sh within the directory it was DL to
 
-Or copy and paste the curl commands below in your terminal
-
-
 
 SCRIPTS
 
 Unbound (has Piholes curl command built in if you havn't installed Pihole yet :))
+https://https://github.com/raptor170/Piscripts/edit/main/unbound.sh
 
-curl -sSL https://raw.githubusercontent.com/raptor170/Piscripts/main/unbound.sh | bash
