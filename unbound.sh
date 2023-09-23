@@ -28,32 +28,61 @@ echo "
 
 SAVING YOUR TIME ONE SCRIPT AT A TIME"
 
-#sleep will pause to progress to next line and is in seconds
 sleep 2
     echo ""
     echo "Unbound Automatic Installation Script"
 sleep 0.5
-#echo and using the parentheses will print the text
     echo ""
     echo "Scripting first aid will start in"
     echo ""
 sleep 1
-    echo "3"
+    echo -e "\e[1;32m3"
 sleep 1
     echo "2"
 sleep 1
-    echo "1"
+    echo -e "1\e[0m"
 sleep 1
 
-sudo apt update && sudo apt upgrade -y
+echo "Checking for Pi-hole Installation..."
+if command -v pihole
+then
+    echo -e "\e[1;32mPi-Hole is installed! Now checking for current Unbound installation...\e[0m"
+    echo ""
+else
+    echo -e "\e[1;31mPi-Hole not installed!\e[0m"
+    echo ""
+while true; do
+    read -p "Would you Like to install Pi-Hole? (y/n)" ph
+    case $ph in
+    [yY] ) echo ok, Proceeding with pihole installation;
+    curl -sSL https://install.pi-hole.net | bash
+    break;;
+    [nN] ) echo -e "\e[1;31m exiting script...\e[0m";
+    exit;;
+    * ) echo invalid response;;
+   esac
+  done 
+fi
+
+if command -v pihole
+then
+    echo ""
+else
+    echo -e "\e[1;31mPi-hole Failed to Install, please re-run script again\e[0m"
+    exit 102
+fi
+
 if [ -f /usr/sbin/unbound ]
 then
-    echo "Unbound is already installed"
-    echo "ENJOY USING UNBOUND"
+    echo -e "\e[1;32mUnbound is already installed\e[0m"
+    echo -e "\e[1;32mENJOY USING UNBOUND\e[0m"
 exit 99
 else
-    echo "Unbound not installed, Preparing your installation"⠀⠀⠀⠀
+    echo -e "\e[1;32mUnbound not installed, Preparing your installation...\e[0m"⠀⠀⠀⠀
+    echo ""
 fi
+
+sudo apt update && sudo apt upgrade -y
 sudo apt install unbound -y
 sudo touch /etc/unbound/unbound.conf.d/pi-hole.conf
 sudo sh -c 'cat > /etc/unbound/unbound.conf.d/pi-hole.conf' << EOF
@@ -127,9 +156,9 @@ EOF
 
 if [ -f /etc/unbound/unbound.conf.d/pi-hole.conf ]
 then
-    echo "/etc/unbound/unbound.conf.d/pi-hole.conf has been created and updated"
+    echo -e "\e[1;32m/etc/unbound/unbound.conf.d/pi-hole.conf has been created and updated\e[0m"
 else
-    echo "/etc/unbound/unbound.conf.d/pi-hole.conf has failed to be created, uninstalling unbound, please try again"
+    echo -e "\e[1;31m/etc/unbound/unbound.conf.d/pi-hole.conf has failed to be created, uninstalling unbound, please try again\e[0m"
 sudo apt remove unbound -y
 exit 98
 fi
@@ -140,9 +169,9 @@ EOF
 
 if [ -f /etc/dnsmasq.d/99-edns.conf ]
 then
-    echo "/etc/dnsmasq.d/99-edns.conf created and updated"
+    echo -e "\e[1;32m/etc/dnsmasq.d/99-edns.conf created and updated\e[0m"
 else
-    echo "/etc/dnsmasq.d/99-edns.conf has failed to be created, uninstalling unbound, please try again"
+    echo -e "\e[1;31m/etc/dnsmasq.d/99-edns.conf has failed to be created, uninstalling unbound, please try again\e[0m"
 sudo apt remove unbound -y
 exit 97
 fi
@@ -153,19 +182,19 @@ sudo sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
 sudo rm /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
 sudo service unbound restart
 sudo systemctl restart unbound
-    echo "Unbound Restarting, please wait....May take a bit of time"
+    echo -e "\e[1;35mUnbound Restarting, please wait....May take a bit of time\e[0m"
 sleep 30
     echo ""
     echo ""
     echo ""
-    echo "Check few lines down and make sure Status says NOERROR"
+    echo -e "\e[1;33mCheck few lines down and make sure Status says NOERROR\e[0m"
     echo ""
 dig dnssec.works @127.0.0.1 -p 5335
     echo ""
     echo ""
     echo ""
 sleep 5
-    echo "Check few lines down and make sure status says SERVFAIL"
+    echo -e "\e[1;33mCheck few lines down and make sure status says SERVFAIL\e[0m"
     echo ""
 dig fail01.dnssec.works @127.0.0.1 -p 5335
 sleep 2
@@ -177,14 +206,14 @@ dig fail01.dnssec.works @127.0.0.1 -p 5335
     echo ""
     echo ""
 sleep 5
-    echo "If dig dnssec.works @127.0.0.1 -p 5335 shows NOERROR"
-    echo "And dig fail01.dnssec.works @127.0.0.1 -p 5335 Shows SERVFAIL"
+    echo -e "\e[1;33mIf dig dnssec.works @127.0.0.1 -p 5335 shows NOERROR"
+    echo -e "And dig fail01.dnssec.works @127.0.0.1 -p 5335 Shows SERVFAIL\e[0m"
     echo ""
     echo ""
-    echo "Than Proceed to Pihole, Settings, DNS, under Custom 1 IPv4 enter the value"
+    echo -e "\e[1;32mThan Proceed to Pihole, Settings, DNS, under Custom 1 IPv4 enter the value"
     echo "127.0.0.1#5335"
     echo "and click save on bottom of page"
     echo ""
     echo "If all goes well, Enjoy Running Unbound!!!"
     echo "and if feeling generous, im always down for a coffee, donations not required, but appreciated"
-    echo "Thank you for using Robinson Scripts, ENJOY!!!"
+    echo -e "Thank you for using Robinson Scripts, ENJOY!!!\e[0m"
