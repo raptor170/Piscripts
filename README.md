@@ -16,7 +16,7 @@ The scripts can be downloaded manually and ran with, bash filenamexample.sh with
 
 SCRIPTS
 
-Unbound (has Piholes curl command built in if you havn't installed Pihole yet :))
+Unbound (has Piholes curl command built in if you havn't installed Pihole yet, and option to automatically switch upstream DNS in Pihole :))
 
 https://github.com/raptor170/Piscripts/blob/main/unbound.sh
 
