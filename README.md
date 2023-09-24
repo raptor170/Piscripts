@@ -23,4 +23,6 @@ https://github.com/raptor170/Piscripts/blob/main/unbound.sh
 
 if you enjoy my scripts and would like to buy me a coffee...or beer :) 
 
+https://www.buymeacoffee.com/piscripts
+
 monero: 42xF8FoWNY1ZZqJAYVrJDuS9n1JiyUxA1DQXb3MryjMK5o7a1BRahnHhZJb6tL1xsqTVK8PKmVFmCP8UCEJZMHCe44qmV61
