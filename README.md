@@ -21,6 +21,8 @@ Unbound (has Piholes curl command built in if you havn't installed Pihole yet, a
 https://github.com/raptor170/Piscripts/blob/main/unbound.sh
 
 
+-------------------------------------------
+
 if you enjoy my scripts and would like to buy me a coffee...or beer :) 
 
 https://www.buymeacoffee.com/piscripts
